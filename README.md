@@ -23,7 +23,7 @@ This is a web based "story time" application using modern web frameworks. This w
 ![image](https://user-images.githubusercontent.com/10646650/162261351-ffe7e6cf-ac44-474d-812a-5f8ad5578b7c.png)
 
 ## API Endpoints
-List all Items
+**List all Items**
 - GET [URL]/items
 
 **Show a specific list/story**
