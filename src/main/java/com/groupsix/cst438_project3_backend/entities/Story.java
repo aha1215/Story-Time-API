@@ -14,6 +14,16 @@ public class Story {
     @OneToMany
     private List<Stories> storyList;
 
+    public Story(Integer userId, String storyName, List<Stories> storyList) {
+        this.userId = userId;
+        this.storyName = storyName;
+        this.storyList = storyList;
+    }
+
+    public Story() {
+
+    }
+
     public Integer getStoryId() {
         return storyId;
     }
