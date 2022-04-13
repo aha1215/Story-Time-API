@@ -26,20 +26,20 @@ public class StoryController {
         return ResponseEntity.ok(story);
     }
 
-    @GetMapping(path = "/story?storyId={storyId}")
-    public ResponseEntity<Story> getStoryById(@PathVariable int storyId) {
+    @GetMapping(path = "/story", params = "storyId")
+    public ResponseEntity<Story> getStoryById(@RequestParam int storyId) {
         Story story = storyService.findById(storyId);
         return ResponseEntity.ok(story);
     }
 
-    @GetMapping(path = "/story?userId={userId}")
-    public ResponseEntity<Story> getStoryByUserId(@PathVariable int userId) {
+    @GetMapping(path = "/story", params = "userId")
+    public ResponseEntity<Story> getStoryByUserId(@RequestParam int userId) {
         Story story = storyService.findByUserId(userId);
         return ResponseEntity.ok(story);
     }
 
-    @GetMapping(path = "/story?storyName={storyName}")
-    public ResponseEntity<Story> getStoryByName(@PathVariable String storyName) {
+    @GetMapping(path = "/story", params = "storyName")
+    public ResponseEntity<Story> getStoryByName(@RequestParam String storyName) {
         Story story = storyService.findByName(storyName);
         return ResponseEntity.ok(story);
     }
