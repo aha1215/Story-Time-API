@@ -5,5 +5,6 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface StoryRepository extends CrudRepository<Story, Integer> {
     Story findStoryByStoryId(int storyId);
+    Story findStoryByUserId(int userId);
     Story findStoryByStoryName(String storyName);
 }

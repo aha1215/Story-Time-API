@@ -3,8 +3,11 @@ package com.groupsix.cst438_project3_backend.service;
 import com.groupsix.cst438_project3_backend.entities.Stories;
 import com.groupsix.cst438_project3_backend.repositories.StoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class StoriesService {
+
     @Autowired
     StoriesRepository storiesRepository;
 
