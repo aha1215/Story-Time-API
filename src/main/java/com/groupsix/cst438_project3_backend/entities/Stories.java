@@ -13,6 +13,15 @@ public class Stories {
     private Integer userId;
     private String story;
 
+    public Stories(Integer userId, String story) {
+        this.userId = userId;
+        this.story = story;
+    }
+
+    public Stories() {
+
+    }
+
     public Integer getStoriesId() {
         return storiesId;
     }

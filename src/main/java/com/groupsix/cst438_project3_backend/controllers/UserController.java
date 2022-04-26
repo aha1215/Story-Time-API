@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  *  A controller to handle user related API endpoints
  */
@@ -23,5 +25,11 @@ public class UserController {
         User user = new User(username, password, false);
         userService.saveUser(user);
         return ResponseEntity.ok(user);
+    }
+
+    @GetMapping(path = "/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> userList = userService.getAll();
+        return ResponseEntity.ok(userList);
     }
 }

@@ -5,6 +5,8 @@ import com.groupsix.cst438_project3_backend.repositories.StoriesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StoriesService {
 
@@ -18,4 +20,9 @@ public class StoriesService {
     public Stories findByUserId(int userId) {
         return storiesRepository.findStoriesByUserId(userId);
     }
+
+    public List<Stories> getAllByUserId(int userId) {
+        return storiesRepository.findAllByUserId(userId);
+    }
+
 }
