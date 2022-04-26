@@ -1,12 +1,10 @@
 package com.groupsix.cst438_project3_backend.controllers;
-import com.groupsix.cst438_project3_backend.entities.Stories;
+
 import com.groupsix.cst438_project3_backend.entities.Story;
 import com.groupsix.cst438_project3_backend.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  *  A controller to handle story related API endpoints

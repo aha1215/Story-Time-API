@@ -8,13 +8,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
+//@SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 @SpringBootApplication(exclude = {SecurityAutoConfiguration.class})
 public class Cst438Project3BackendApplication {
 
     @RequestMapping("/")
     @ResponseBody
     String home() {
-        return "Welcome!";
+        return "Welcome to backend!";
     }
 
     public static void main(String[] args) {
