@@ -20,11 +20,14 @@ public class UserService {
     public User updateUser(int userId, User user) {
         User nUser = userRepository.findUserByUserId(userId);
 
-        nUser.setUsername(user.getUsername());
-        nUser.setPassword(user.getUsername());
-        nUser.setAdmin(user.isAdmin());
+        if (nUser != null) {
+            nUser.setUsername(user.getUsername());
+            nUser.setPassword(user.getUsername());
+            nUser.setAdmin(user.isAdmin());
 
-        return userRepository.save(user);
+            return userRepository.save(user);
+        }
+        return null;
     }
 
     public void deleteUser(User user) {

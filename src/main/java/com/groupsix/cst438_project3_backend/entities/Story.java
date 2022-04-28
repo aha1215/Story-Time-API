@@ -11,7 +11,8 @@ public class Story {
     private Integer userId;
     private String storyName;
 
-    @OneToMany
+
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Stories> storyList;
 
     public Story(Integer userId, String storyName, List<Stories> storyList) {
