@@ -13,6 +13,25 @@ public class StoriesService {
     @Autowired
     StoriesRepository storiesRepository;
 
+    public void saveStories(Stories stories) {
+        storiesRepository.save(stories);
+    }
+
+    public Stories updateStories(int userId, Stories stories) {
+        Stories nStories = storiesRepository.findStoriesByUserId(userId);
+
+        if (nStories != null) {
+            nStories.setStory(stories.getStory());
+            nStories.setUserId(stories.getUserId());
+            return storiesRepository.save(nStories);
+        }
+        return null;
+    }
+
+    public void deleteStories(Stories stories) {
+        storiesRepository.delete(stories);
+    }
+
     public Stories findById(int storiesId) {
         return storiesRepository.findStoriesByStoriesId(storiesId);
     }
