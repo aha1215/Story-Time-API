@@ -24,6 +24,12 @@ public class StoriesController {
         return ResponseEntity.ok(storiesList);
     }
 
+    @GetMapping(path = "/stories", params = {"userId", "story"})
+    public ResponseEntity<List<Stories>> getStoriesByUserIdAndStory(@RequestParam int userId, @RequestParam String story) {
+        List<Stories> stories = storiesService.findByUserIdAndStory(userId, story);
+        return ResponseEntity.ok(stories);
+    }
+
     @PostMapping(path = "/newstories")
     public ResponseEntity<Stories> newStories(@RequestParam int userId, @RequestParam String story) {
         Stories stories = new Stories(userId,story);

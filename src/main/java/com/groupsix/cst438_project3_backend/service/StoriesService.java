@@ -40,6 +40,8 @@ public class StoriesService {
         return storiesRepository.findStoriesByUserId(userId);
     }
 
+    public List<Stories> findByUserIdAndStory(int userId, String story) { return storiesRepository.findStoriesByUserIdAndStory(userId, story); }
+
     public List<Stories> getAllByUserId(int userId) {
         return storiesRepository.findAllByUserId(userId);
     }
