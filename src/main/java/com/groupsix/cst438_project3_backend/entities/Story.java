@@ -1,5 +1,7 @@
 package com.groupsix.cst438_project3_backend.entities;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,19 +12,47 @@ public class Story {
     private Integer storyId;
     private Integer userId;
     private String storyName;
+    private Integer likes;
+    private Integer dislikes;
 
+    private Boolean isOpen;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Stories> storyList;
 
-    public Story(Integer userId, String storyName, List<Stories> storyList) {
+    public Story(Integer userId, String storyName, List<Stories> storyList, boolean isOpen) {
         this.userId = userId;
         this.storyName = storyName;
         this.storyList = storyList;
+        this.isOpen = isOpen;
     }
 
     public Story() {
 
+    }
+
+    public Boolean getOpen() {
+        return isOpen;
+    }
+
+    public void setOpen(Boolean open) {
+        isOpen = open;
+    }
+
+    public Integer getLikes() {
+        return likes;
+    }
+
+    public void setLikes(Integer likes) {
+        this.likes = likes;
+    }
+
+    public Integer getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(Integer dislikes) {
+        this.dislikes = dislikes;
     }
 
     public Integer getStoryId() {

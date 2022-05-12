@@ -23,6 +23,9 @@ public class StoryService {
         if (nStory != null) {
             nStory.setStoryName(story.getStoryName());
             nStory.setStoryList(story.getStoryList());
+            nStory.setOpen(story.getOpen());
+            nStory.setLikes(story.getLikes());
+            nStory.setDislikes(story.getDislikes());
             return storyRepository.save(nStory);
         }
         return null;

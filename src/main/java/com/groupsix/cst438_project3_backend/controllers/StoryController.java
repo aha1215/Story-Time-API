@@ -32,7 +32,9 @@ public class StoryController {
             Stories stories = gson.fromJson(String.valueOf(json), Stories.class);
             storyList.add(stories);
         }
-        Story story = new Story(userId, storyName, storyList);
+        Story story = new Story(userId, storyName, storyList, true);
+        story.setLikes(0);
+        story.setDislikes(0);
         storyService.saveStory(story);
         return ResponseEntity.ok(story);
     }
