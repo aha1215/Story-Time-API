@@ -12,4 +12,8 @@ public interface StoryRepository extends CrudRepository<Story, Integer> {
     Story findStoryByUserIdAndStoryName(int userId, String storyName);
 
     List<Story> getAllByUserId(int userId);
+
+    List<Story> getAllByIsOpenTrue();
+    List<Story> getAllByIsOpenFalse();
+    List<Story> getAllByStoryIdIsNotNull();
 }
