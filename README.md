@@ -1,4 +1,4 @@
-# Group6_CST438_Project3_Backend
+# Group6_CST438_Project3_Backend - Main Repository (For issues)
 ## Team Members
 
 1. Alfredo Hernandez
