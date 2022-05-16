@@ -17,7 +17,7 @@ public class Story {
 
     private Boolean isOpen;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany//removed cascade type All
     private List<Stories> storyList;
 
     public Story(Integer userId, String storyName, List<Stories> storyList, boolean isOpen) {

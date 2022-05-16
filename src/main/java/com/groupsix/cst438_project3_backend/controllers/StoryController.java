@@ -39,6 +39,35 @@ public class StoryController {
         return ResponseEntity.ok(story);
     }
 
+    @PatchMapping(path = "/story/update")
+    public ResponseEntity<Story> updateStoryIsOpen(@RequestParam Integer storyId, @RequestParam boolean isOpen) {
+        Story story = storyService.findById(storyId);
+        if(story != null) {
+            story.setOpen(isOpen);
+            storyService.saveStory(story);
+        }
+        // It's not ok
+        return ResponseEntity.ok(story);
+    }
+
+    @GetMapping(path = "/story/all")
+    public ResponseEntity<List<Story>> getAllStory() {
+        List<Story> storyList = storyService.getAll();
+        return ResponseEntity.ok(storyList);
+    }
+
+    @GetMapping(path = "/story/allopen")
+    public ResponseEntity<List<Story>> getAllOpenStory() {
+        List<Story> storyList = storyService.getAllOpenStory();
+        return ResponseEntity.ok(storyList);
+    }
+
+    @GetMapping(path = "/story/allclosed")
+    public ResponseEntity<List<Story>> getAllClosedStory() {
+        List<Story> storyList = storyService.getAllClosedStory();
+        return ResponseEntity.ok(storyList);
+    }
+
     @GetMapping(path = "/story", params = "storyId")
     public ResponseEntity<Story> getStoryById(@RequestParam int storyId) {
         Story story = storyService.findById(storyId);

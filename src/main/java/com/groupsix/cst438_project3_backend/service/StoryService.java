@@ -44,4 +44,16 @@ public class StoryService {
     }
 
     public List<Story> getAllByUserId(int userId) { return storyRepository.getAllByUserId(userId); }
+
+    public List<Story> getAllOpenStory() {
+        return storyRepository.getAllByIsOpenTrue();
+    }
+
+    public List<Story> getAllClosedStory() {
+        return storyRepository.getAllByIsOpenFalse();
+    }
+
+    public List<Story> getAll() {
+        return storyRepository.getAllByStoryIdIsNotNull();
+    }
 }
