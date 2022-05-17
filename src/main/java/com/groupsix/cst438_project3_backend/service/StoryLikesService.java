@@ -5,6 +5,8 @@ import com.groupsix.cst438_project3_backend.repositories.StoryLikesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class StoryLikesService {
     @Autowired
@@ -29,5 +31,9 @@ public class StoryLikesService {
 
     public StoryLikes getLikesByStoryIdAndUserId(int storyId, int userId) {
         return storyLikesRepository.findByStoryIdAndUserId(storyId, userId);
+    }
+
+    public List<StoryLikes> getAll() {
+        return storyLikesRepository.getAllByLikesIdIsNotNull();
     }
 }

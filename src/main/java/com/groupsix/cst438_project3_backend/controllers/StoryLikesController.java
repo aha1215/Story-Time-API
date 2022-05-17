@@ -1,10 +1,13 @@
 package com.groupsix.cst438_project3_backend.controllers;
 
 import com.groupsix.cst438_project3_backend.entities.StoryLikes;
+import com.groupsix.cst438_project3_backend.entities.User;
 import com.groupsix.cst438_project3_backend.service.StoryLikesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -37,5 +40,14 @@ public class StoryLikesController {
     public ResponseEntity<StoryLikes> getByStoryIdAndUserId(@RequestParam int storyId, @RequestParam int userId) {
         StoryLikes storyLikes = storyLikesService.getLikesByStoryIdAndUserId(storyId, userId);
         return ResponseEntity.ok(storyLikes);
+    }
+
+    /**
+     * @return returns all like entries
+     */
+    @GetMapping(path = "/likes")
+    public ResponseEntity<List<StoryLikes>> getAllLikes() {
+        List<StoryLikes> storyLikesList = storyLikesService.getAll();
+        return ResponseEntity.ok(storyLikesList);
     }
 }
