@@ -52,7 +52,7 @@ public class StoryController {
      * @param isOpen true is open and false is closed
      * @return response entity of updated story
      */
-    @PatchMapping(path = "/story/update")
+    @PatchMapping(path = "/story/update", params = {"storyId", "isOpen"})
     public ResponseEntity<Story> updateStoryIsOpen(@RequestParam Integer storyId, @RequestParam boolean isOpen) {
         Story story = storyService.findById(storyId);
         if(story != null) {
@@ -69,7 +69,7 @@ public class StoryController {
      * @param likes is number of likes a story has
      * @return response entity of updated story
      */
-    @PatchMapping(path = "story/update")
+    @PatchMapping(path = "story/update", params = {"storyId", "likes"})
     public ResponseEntity<Story> updateStoryLikes(@RequestParam Integer storyId, @RequestParam int likes) {
         Story story = storyService.findById(storyId);
         if(story != null) {
@@ -85,7 +85,7 @@ public class StoryController {
      * @param dislikes is number of likes a story has
      * @return response entity of updated story
      */
-    @PatchMapping(path = "story/update")
+    @PatchMapping(path = "story/update", params = {"storyId", "dislikes"})
     public ResponseEntity<Story> updateStoryDislikes(@RequestParam Integer storyId, @RequestParam int dislikes) {
         Story story = storyService.findById(storyId);
         if(story != null) {
