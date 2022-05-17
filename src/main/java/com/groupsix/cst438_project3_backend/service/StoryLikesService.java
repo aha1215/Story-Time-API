@@ -29,6 +29,10 @@ public class StoryLikesService {
         return null;
     }
 
+    public StoryLikes getLikesById(int likesId) {
+        return storyLikesRepository.findByLikesId(likesId);
+    }
+
     public StoryLikes getLikesByStoryIdAndUserId(int storyId, int userId) {
         return storyLikesRepository.findByStoryIdAndUserId(storyId, userId);
     }

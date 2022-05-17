@@ -1,5 +1,6 @@
 package com.groupsix.cst438_project3_backend.controllers;
 
+import com.groupsix.cst438_project3_backend.entities.Story;
 import com.groupsix.cst438_project3_backend.entities.StoryLikes;
 import com.groupsix.cst438_project3_backend.entities.User;
 import com.groupsix.cst438_project3_backend.service.StoryLikesService;
@@ -27,6 +28,26 @@ public class StoryLikesController {
     public ResponseEntity<StoryLikes> newLikesEntry(@RequestParam int storyId, @RequestParam int userId, @RequestParam boolean isLiked, @RequestParam boolean isDisliked) {
         StoryLikes storyLikes = new StoryLikes(storyId, userId, isLiked, isDisliked);
         storyLikesService.saveStoryLikes(storyLikes);
+        return ResponseEntity.ok(storyLikes);
+    }
+
+    @PatchMapping(path = "likes/isliked", params = {"likesId", "isLiked"})
+    public ResponseEntity<StoryLikes> updateStoryIsLiked(@RequestParam Integer likesId, @RequestParam boolean isLiked) {
+        StoryLikes storyLikes = storyLikesService.getLikesById(likesId);
+        if(storyLikes != null) {
+            storyLikes.setLiked(isLiked);
+            storyLikesService.saveStoryLikes(storyLikes);
+        }
+        return ResponseEntity.ok(storyLikes);
+    }
+
+    @PatchMapping(path = "likes/isdisliked", params = {"likesId", "isDisliked"})
+    public ResponseEntity<StoryLikes> updateStoryIsDisliked(@RequestParam Integer likesId, @RequestParam boolean isDisliked) {
+        StoryLikes storyLikes = storyLikesService.getLikesById(likesId);
+        if(storyLikes != null) {
+            storyLikes.setDisliked(isDisliked);
+            storyLikesService.saveStoryLikes(storyLikes);
+        }
         return ResponseEntity.ok(storyLikes);
     }
 
