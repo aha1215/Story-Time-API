@@ -1,8 +1,6 @@
 package com.groupsix.cst438_project3_backend.controllers;
 
-import com.groupsix.cst438_project3_backend.entities.Story;
 import com.groupsix.cst438_project3_backend.entities.StoryLikes;
-import com.groupsix.cst438_project3_backend.entities.User;
 import com.groupsix.cst438_project3_backend.service.StoryLikesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

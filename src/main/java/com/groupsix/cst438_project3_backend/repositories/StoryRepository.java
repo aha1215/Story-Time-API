@@ -13,7 +13,7 @@ public interface StoryRepository extends CrudRepository<Story, Integer> {
 
     List<Story> getAllByUserId(int userId);
 
-    List<Story> getAllByIsOpenTrue();
-    List<Story> getAllByIsOpenFalse();
+    List<Story> getAllByOpenIsTrue();
+    List<Story> getAllByOpenIsFalse();
     List<Story> getAllByStoryIdIsNotNull();
 }

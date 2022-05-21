@@ -39,9 +39,7 @@ public class StoryController {
             Stories stories = gson.fromJson(String.valueOf(json), Stories.class);
             storyList.add(stories);
         }
-        Story story = new Story(userId, storyName, storyList, true);
-        story.setLikes(0);
-        story.setDislikes(0);
+        Story story = new Story(userId, storyName, storyList);
         storyService.saveStory(story);
         return ResponseEntity.ok(story);
     }
@@ -55,8 +53,8 @@ public class StoryController {
     @PatchMapping(path = "/story/update", params = {"storyId", "isOpen"})
     public ResponseEntity<Story> updateStoryIsOpen(@RequestParam Integer storyId, @RequestParam boolean isOpen) {
         Story story = storyService.findById(storyId);
-        if(story != null) {
-            story.setOpen(isOpen);
+        if (story != null) {
+            story.setIsOpen(isOpen);
             storyService.saveStory(story);
         }
         // It's not ok

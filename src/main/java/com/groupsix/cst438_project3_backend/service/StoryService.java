@@ -23,7 +23,7 @@ public class StoryService {
         if (nStory != null) {
             nStory.setStoryName(story.getStoryName());
             nStory.setStoryList(story.getStoryList());
-            nStory.setOpen(story.getOpen());
+            nStory.setIsOpen(story.getIsOpen());
             nStory.setLikes(story.getLikes());
             nStory.setDislikes(story.getDislikes());
             return storyRepository.save(nStory);
@@ -46,11 +46,11 @@ public class StoryService {
     public List<Story> getAllByUserId(int userId) { return storyRepository.getAllByUserId(userId); }
 
     public List<Story> getAllOpenStory() {
-        return storyRepository.getAllByIsOpenTrue();
+        return storyRepository.getAllByOpenIsTrue();
     }
 
     public List<Story> getAllClosedStory() {
-        return storyRepository.getAllByIsOpenFalse();
+        return storyRepository.getAllByOpenIsFalse();
     }
 
     public List<Story> getAll() {
