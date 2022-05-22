@@ -1,12 +1,16 @@
 package com.groupsix.cst438_project3_backend.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.*;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
+@Table
 public class Story {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer storyId;
     private Integer userId;
 
@@ -15,7 +19,8 @@ public class Story {
     private Integer dislikes;
     private Boolean open;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL, targetEntity = Stories.class, mappedBy = "story")
+    @JsonManagedReference // https://www.baeldung.com/jackson-bidirectional-relationships-and-infinite-recursion
     private List<Stories> storyList;
 
     public Story(Integer userId, String storyName, List<Stories> storyList) {
@@ -85,5 +90,18 @@ public class Story {
 
     public void setStoryList(List<Stories> storyList) {
         this.storyList = storyList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Story story = (Story) o;
+        return Objects.equals(storyId, story.storyId) && Objects.equals(userId, story.userId) && Objects.equals(storyName, story.storyName) && Objects.equals(likes, story.likes) && Objects.equals(dislikes, story.dislikes) && Objects.equals(open, story.open) && Objects.equals(storyList, story.storyList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(storyId, userId, storyName, likes, dislikes, open, storyList);
     }
 }

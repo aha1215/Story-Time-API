@@ -32,8 +32,9 @@ public class StoryLikesController {
     @PatchMapping(path = "likes/isliked", params = {"likesId", "isLiked"})
     public ResponseEntity<StoryLikes> updateStoryIsLiked(@RequestParam Integer likesId, @RequestParam boolean isLiked) {
         StoryLikes storyLikes = storyLikesService.getLikesById(likesId);
-        if(storyLikes != null) {
+        if (storyLikes != null) {
             storyLikes.setLiked(isLiked);
+            storyLikes.setDisliked(false);
             storyLikesService.saveStoryLikes(storyLikes);
         }
         return ResponseEntity.ok(storyLikes);
@@ -44,13 +45,14 @@ public class StoryLikesController {
         StoryLikes storyLikes = storyLikesService.getLikesById(likesId);
         if(storyLikes != null) {
             storyLikes.setDisliked(isDisliked);
+            storyLikes.setLiked(false);
             storyLikesService.saveStoryLikes(storyLikes);
         }
         return ResponseEntity.ok(storyLikes);
     }
 
     /**
-     * Retrieve a story by storyId and userId. Can be used to check if story is liked or disliked
+     * Retrieve by storyId and userId. Can be used to check if story is liked or disliked
      * @param storyId is id linking to story
      * @param userId is id linking to user
      * @return response entity story likes

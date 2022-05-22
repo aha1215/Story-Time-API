@@ -1,9 +1,7 @@
 package com.groupsix.cst438_project3_backend.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.Objects;
 
 /**
  * Class for likes AND dislikes. Check if a user has liked or disliked a story. Only allow them to do this once.
@@ -13,10 +11,12 @@ import javax.persistence.Id;
 public class StoryLikes {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int likesId;
     int storyId;
-    int userId;
+
+    //@Column(name = "user_id", unique = true)
+    int userId; // A user can only have one entry per story to like or dislike
 
     boolean isLiked;
     boolean isDisliked;
@@ -70,5 +70,18 @@ public class StoryLikes {
 
     public void setDisliked(boolean disliked) {
         isDisliked = disliked;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StoryLikes that = (StoryLikes) o;
+        return likesId == that.likesId && storyId == that.storyId && userId == that.userId && isLiked == that.isLiked && isDisliked == that.isDisliked;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(likesId, storyId, userId, isLiked, isDisliked);
     }
 }

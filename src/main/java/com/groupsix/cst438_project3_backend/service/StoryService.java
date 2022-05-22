@@ -14,7 +14,7 @@ public class StoryService {
     StoryRepository storyRepository;
 
     public void saveStory(Story story) {
-        storyRepository.save(story);
+        Story save = storyRepository.save(story);
     }
 
     public Story updateStory(int userId, String storyName, Story story) {
@@ -26,6 +26,7 @@ public class StoryService {
             nStory.setIsOpen(story.getIsOpen());
             nStory.setLikes(story.getLikes());
             nStory.setDislikes(story.getDislikes());
+
             return storyRepository.save(nStory);
         }
         return null;
@@ -35,8 +36,8 @@ public class StoryService {
         return storyRepository.findStoryByStoryId(storyId);
     }
 
-    public Story findByUserId(int userId) {
-        return storyRepository.findStoryByUserId(userId);
+    public List<Story> findByUserId(int userId) {
+        return storyRepository.getStoryByUserId(userId);
     }
 
     public Story findByName(String storyName) {
