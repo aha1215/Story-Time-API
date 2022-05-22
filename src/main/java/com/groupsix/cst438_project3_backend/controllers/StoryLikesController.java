@@ -1,11 +1,16 @@
 package com.groupsix.cst438_project3_backend.controllers;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.groupsix.cst438_project3_backend.entities.StoryLikes;
 import com.groupsix.cst438_project3_backend.service.StoryLikesService;
+import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -70,5 +75,22 @@ public class StoryLikesController {
     public ResponseEntity<List<StoryLikes>> getAllLikes() {
         List<StoryLikes> storyLikesList = storyLikesService.getAll();
         return ResponseEntity.ok(storyLikesList);
+    }
+
+    @DeleteMapping(path = "story/likes/delete")
+    public String deleteStoryLikesList(@RequestParam Boolean isAdmin, @RequestBody JSONObject[] likesIdList) {
+        if (isAdmin && likesIdList.length > 0) {
+            ArrayList<Integer> list = new ArrayList<>();
+            Type listType = new TypeToken<List<Integer>>() {}.getType();
+            Gson gson = new Gson();
+            for (JSONObject likesJson : likesIdList) {
+                Integer id = gson.fromJson(String.valueOf(likesJson), listType);
+                list.add(id);
+            }
+            storyLikesService.deleteStoryLikes(list);
+            return "Story Likes deleted successfully!";
+        } else {
+            return "You are not an admin or list is empty!";
+        }
     }
 }

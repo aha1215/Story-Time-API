@@ -29,6 +29,10 @@ public class StoryLikesService {
         return null;
     }
 
+    public void deleteStoryLikes(List<Integer> likesIdList) {
+        storyLikesRepository.deleteAllById(likesIdList);
+    }
+
     public StoryLikes getLikesById(int likesId) {
         return storyLikesRepository.findByLikesId(likesId);
     }

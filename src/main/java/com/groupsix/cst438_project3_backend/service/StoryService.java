@@ -5,6 +5,7 @@ import com.groupsix.cst438_project3_backend.repositories.StoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -30,6 +31,10 @@ public class StoryService {
             return storyRepository.save(nStory);
         }
         return null;
+    }
+
+    public void deleteStory(List<Integer> storyIdList) {
+        storyRepository.deleteAllById(storyIdList);
     }
 
     public Story findById(int storyId) {
