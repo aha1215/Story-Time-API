@@ -32,17 +32,35 @@ public class StoryController {
      */
     @PostMapping(path = "/newstory")
     public ResponseEntity<Story> newStory(@RequestParam int userId, @RequestParam String storyName, @RequestBody JSONObject[] jsonStories) {
+        Story story = new Story(userId, storyName, null);
         // Parse json object to list of stories using gson
         Gson gson = new Gson();
         List<Stories> storyList = new ArrayList<>();
         for (JSONObject json: jsonStories) {
             Stories stories = gson.fromJson(String.valueOf(json), Stories.class);
+            stories.setStoryParent(story);
             storyList.add(stories);
         }
-        Story story = new Story(userId, storyName, storyList, true);
-        story.setLikes(0);
-        story.setDislikes(0);
+        story.setStoryList(storyList);
         storyService.saveStory(story);
+        return ResponseEntity.ok(story);
+    }
+
+    @PatchMapping(path = "/story/update/list")
+    public ResponseEntity<Story> updateStoryList(@RequestParam Integer storyId, @RequestBody JSONObject[] jsonStories) {
+        Story story = storyService.findById(storyId);
+
+        if (story != null) {
+           Gson gson = new Gson();
+           List<Stories> storiesList = new ArrayList<>();
+           for(JSONObject json : jsonStories) {
+               Stories stories = gson.fromJson(String.valueOf(json), Stories.class);
+               stories.setStoryParent(story);
+               storiesList.add(stories);
+           }
+           story.setStoryList(storiesList);
+           storyService.saveStory(story);
+        }
         return ResponseEntity.ok(story);
     }
 
@@ -55,8 +73,8 @@ public class StoryController {
     @PatchMapping(path = "/story/update", params = {"storyId", "isOpen"})
     public ResponseEntity<Story> updateStoryIsOpen(@RequestParam Integer storyId, @RequestParam boolean isOpen) {
         Story story = storyService.findById(storyId);
-        if(story != null) {
-            story.setOpen(isOpen);
+        if (story != null) {
+            story.setIsOpen(isOpen);
             storyService.saveStory(story);
         }
         // It's not ok
@@ -72,7 +90,8 @@ public class StoryController {
     @PatchMapping(path = "story/update", params = {"storyId", "likes"})
     public ResponseEntity<Story> updateStoryLikes(@RequestParam Integer storyId, @RequestParam int likes) {
         Story story = storyService.findById(storyId);
-        if(story != null) {
+
+        if (story != null) {
             story.setLikes(likes);
             storyService.saveStory(story);
         }
@@ -88,7 +107,7 @@ public class StoryController {
     @PatchMapping(path = "story/update", params = {"storyId", "dislikes"})
     public ResponseEntity<Story> updateStoryDislikes(@RequestParam Integer storyId, @RequestParam int dislikes) {
         Story story = storyService.findById(storyId);
-        if(story != null) {
+        if (story != null) {
             story.setDislikes(dislikes);
             storyService.saveStory(story);
         }

@@ -7,13 +7,12 @@ import java.util.List;
 
 public interface StoryRepository extends CrudRepository<Story, Integer> {
     Story findStoryByStoryId(int storyId);
-    Story findStoryByUserId(int userId);
     Story findStoryByStoryName(String storyName);
     Story findStoryByUserIdAndStoryName(int userId, String storyName);
 
     List<Story> getAllByUserId(int userId);
-
-    List<Story> getAllByIsOpenTrue();
-    List<Story> getAllByIsOpenFalse();
+    List<Story> getStoryByUserId(int userId);
+    List<Story> getAllByOpenIsTrue();
+    List<Story> getAllByOpenIsFalse();
     List<Story> getAllByStoryIdIsNotNull();
 }

@@ -4,11 +4,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.util.Objects;
 
 @Entity
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer commentId;
     private Integer storyId; // which story does it belong to?
     private Integer userId; // who made the comment?
@@ -51,5 +52,18 @@ public class Comment {
 
     public void setComment(String comment) {
         this.comment = comment;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Comment comment1 = (Comment) o;
+        return Objects.equals(commentId, comment1.commentId) && Objects.equals(storyId, comment1.storyId) && Objects.equals(userId, comment1.userId) && Objects.equals(comment, comment1.comment);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(commentId, storyId, userId, comment);
     }
 }
