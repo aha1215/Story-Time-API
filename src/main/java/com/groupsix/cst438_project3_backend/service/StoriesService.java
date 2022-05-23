@@ -32,6 +32,10 @@ public class StoriesService {
         storiesRepository.delete(stories);
     }
 
+    public void deleteStories(List<Integer> storiesIdList) {
+        storiesRepository.deleteAllById(storiesIdList);
+    }
+
     public Stories findById(int storiesId) {
         return storiesRepository.findStoriesByStoriesId(storiesId);
     }

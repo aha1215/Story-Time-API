@@ -1,14 +1,17 @@
 package com.groupsix.cst438_project3_backend.controllers;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.groupsix.cst438_project3_backend.entities.Stories;
 import com.groupsix.cst438_project3_backend.entities.Story;
+import com.groupsix.cst438_project3_backend.entities.User;
 import com.groupsix.cst438_project3_backend.service.StoryService;
 import net.minidev.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -176,4 +179,22 @@ public class StoryController {
         Story story = storyService.findByName(storyName);
         return ResponseEntity.ok(story);
     }
+
+    @DeleteMapping(path = "story/delete")
+    public String deleteStoryList(@RequestParam Boolean isAdmin, @RequestBody JSONObject[] storyIdList) {
+        if (isAdmin && storyIdList.length > 0) {
+            ArrayList<Integer> list = new ArrayList<>();
+            Type listType = new TypeToken<List<Integer>>() {}.getType();
+            Gson gson = new Gson();
+            for (JSONObject storyJson : storyIdList) {
+                Integer id = gson.fromJson(String.valueOf(storyJson), listType);
+                list.add(id);
+            }
+            storyService.deleteStory(list);
+            return "Story deleted successfully!";
+        } else {
+            return "You are not an admin or list is empty!";
+        }
+    }
+
 }

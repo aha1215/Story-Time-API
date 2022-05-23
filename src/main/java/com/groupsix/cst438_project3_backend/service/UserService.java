@@ -34,6 +34,10 @@ public class UserService {
         userRepository.delete(user);
     }
 
+    public void deleteUser(List<Integer> userIdList) {
+        userRepository.deleteAllById(userIdList);
+    }
+
     public List<User> getAll() {
         return (List<User>) userRepository.findAll();
     }
